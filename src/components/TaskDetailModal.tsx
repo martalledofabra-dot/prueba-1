@@ -7,7 +7,7 @@ import { CategoryPicker } from './CategoryPicker';
 interface TaskDetailModalProps {
     task: Task;
     categories: Category[];
-    onAddCategory: (name: string, color: TaskColor) => Category;
+    onAddCategory: (name: string, color: TaskColor) => Promise<Category | undefined>;
     onDeleteCategory: (id: string) => void;
     onClose: () => void;
     onUpdate: (updatedTask: Task) => void;

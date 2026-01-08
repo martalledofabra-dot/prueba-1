@@ -7,7 +7,7 @@ import { CategoryPicker } from './CategoryPicker';
 interface TaskFormProps {
     onAdd: (text: string, color: TaskColor, date?: string, description?: string, categoryId?: string, time?: string, repeat?: Task['repeat'], customRepeat?: CustomRepeat) => void;
     categories: Category[];
-    onAddCategory: (name: string, color: TaskColor) => Category;
+    onAddCategory: (name: string, color: TaskColor) => Promise<Category | undefined>;
     onDeleteCategory: (id: string) => void;
 }
 

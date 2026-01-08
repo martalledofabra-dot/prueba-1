@@ -7,7 +7,7 @@ interface CategoryPickerProps {
     categories: Category[];
     selectedCategoryId?: string;
     onSelect: (categoryId: string) => void;
-    onAddCategory: (name: string, color: TaskColor) => Category;
+    onAddCategory: (name: string, color: TaskColor) => Promise<Category | undefined>;
     onDeleteCategory: (id: string) => void;
     onClose: () => void;
     position: { top: number; left: number };
@@ -26,10 +26,12 @@ export const CategoryPicker: React.FC<CategoryPickerProps> = ({
     const [newName, setNewName] = useState('');
     const [newColor, setNewColor] = useState<TaskColor>('blue');
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         if (!newName.trim()) return;
-        const newCat = onAddCategory(newName, newColor);
-        onSelect(newCat.id);
+        const newCat = await onAddCategory(newName, newColor);
+        if (newCat) {
+            onSelect(newCat.id);
+        }
         setIsCreating(false);
         setNewName('');
         onClose();
